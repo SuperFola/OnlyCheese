@@ -11,14 +11,30 @@
         <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
 
         <title>OnlyCheese</title>
+
+        <script src="https://gstatic.com/firebasejs/7.19.1/firebase-app.js" defer></script>
+        <script src="https://gstatic.com/firebase/7.19.1/firebase-analytics.js" defer></script>
+        <script src="https://gstatic.com/firebase/7.19.1/firebase-auth.js" defer></script>
+        <script src="https://gstatic.com/firebase/init.js" defer></script>
+        <script defer>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+              apiKey: "AIzaSyCVzyoDAb8CdZCeXyMQxunnz1YH6TPABHE",
+              authDomain: "only-cheese.firebaseapp.com",
+              databaseURL: "https://only-cheese.firebaseio.com",
+              projectId: "only-cheese",
+              storageBucket: "only-cheese.appspot.com",
+              messagingSenderId: "285394420307",
+              appId: "1:285394420307:web:e82803624bada8eeb97ca6",
+              measurementId: "G-8HWMNSNR5H"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+          </script>
     </head>
     <body>
         <!-- App -->
         <div id="app"></div>
-
-        <!--
-        <script src="/__/firebase/7.19.1/firebase-app.js"></script>
-        <script src="/__/firebase/7.19.1/firebase-analytics.js"></script>
-        <script src="/__/firebase/init.js"></script>-->
     </body>
 </html>

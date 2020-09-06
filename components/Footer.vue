@@ -1,6 +1,6 @@
 <template>
     <div class='phone-footer'>
-        <router-link to='/' class='home-cta'>
+        <router-link to='/' class='home-cta' v-if="$route.name !== 'login'">
             <i class='fas fa-home fa-lg'></i>
         </router-link>
         <div class='upload-cta' v-if="$route.name === 'home'">

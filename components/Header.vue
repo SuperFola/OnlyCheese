@@ -1,7 +1,7 @@
 <template>
     <div class='phone-header'>
         <img src='../images/onlycheese-logo.png' />
-        <router-link class='cancel-cta' v-if="$route.name !== 'home'" to='/'>
+        <router-link class='cancel-cta' v-if="$route.name === 'edit' || $route.name === 'share'" to='/'>
             Cancel
         </router-link>
         <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>

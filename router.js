@@ -4,18 +4,29 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 // components
+import Login from './components/Login';
 import Home from './components/Home';
 import EditImage from './components/EditImage';
 import ShareImage from './components/ShareImage';
 
 import store from './store';
 
+import config from './config';
+
 Vue.use(Router);
 
 let router = new Router({
     mode: 'history',
-    base: '/',
+    base: config.BASE_URL,
     routes: [
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            meta: {
+                requiresNotLoggedIn: true,
+            },
+        },
         {
             path: '/',
             name: 'home',
@@ -40,14 +51,6 @@ let router = new Router({
                 requiresAuth: true,
             },
         },
-        {
-            path: '/login',
-            name: 'login',
-            // component: Login,
-            meta: {
-                requiresNotLoggedIn: true,
-            },
-        }
     ],
 });
 

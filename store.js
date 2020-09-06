@@ -23,7 +23,7 @@ export default new Vuex.Store({
         saveFilter({commit}, filter) { commit('saveFilter', filter); },
     },
     getters: {
-        loggedIn: () => true,  // TODO FIX ME
+        loggedIn: store => !store.userId,  // TODO FIX ME
         image: store => store.image,
         filter: store => store.selectedFilter,
     },
