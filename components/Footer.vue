@@ -34,7 +34,7 @@ export default {
             document.querySelector('#file').value = '';
 
             // go to the next page, /edit
-            this.$router.push({ name: 'edit' });
+            this.$router.push({ name: 'edit', });
         }
     },
 };

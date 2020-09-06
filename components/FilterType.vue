@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import store from '../store';
-
 export default {
     name: 'FilterType',
     props: {
@@ -20,7 +18,7 @@ export default {
     },
     methods: {
         selectFilter() {
-            store.dispatch('saveFilter', this.filter.name);
+            this.$store.dispatch('saveFilter', this.filter.name);
         },
     },
 };

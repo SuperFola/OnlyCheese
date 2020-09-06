@@ -16,18 +16,16 @@
 </template>
 
 <script>
-import store from '../store';
-
 export default {
     name: 'ShareImage',
     data() {
         return {
-            image: store.getters.image,
+            image: this.$store.getters.image,
         };
     },
     methods: {
         selectedFilter() {
-            return store.getters.filter;
+            return this.$store.getters.filter;
         },
     },
 };

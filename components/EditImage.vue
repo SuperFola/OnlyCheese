@@ -2,12 +2,12 @@
     <div class="phone-body">
         <div class='selected-image'
             :class='selectedFilter()'
-            :style="{ backgroundImage: 'url(' + image + ')' }">
+            :style="{ backgroundImage: 'url(' + image() + ')' }">
         </div>
         <div class='filter-container' v-dragscroll.x>
             <filter-type v-for='filter in filters'
                 :filter='filter'
-                :image='image'
+                :image='image()'
                 :key='filters.indexOf(filter)'>
             </filter-type>
         </div>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import store from '../store';
 import FilterType from './FilterType';
 import filters from '../data/filters';
 
@@ -24,7 +23,6 @@ export default {
     data() {
         return {
             filters: filters,
-            image: store.getters.image,
         };
     },
     components: {
@@ -32,7 +30,10 @@ export default {
     },
     methods: {
         selectedFilter() {
-            return store.getters.filter;
+            return this.$store.getters.filter;
+        },
+        image() {
+            return this.$store.getters.image;
         },
     },
 }
