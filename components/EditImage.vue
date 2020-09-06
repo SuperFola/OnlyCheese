@@ -1,7 +1,7 @@
 <template>
     <div class="phone-body">
         <div class='selected-image'
-            :class='selectedFilter'
+            :class='selectedFilter()'
             :style="{ backgroundImage: 'url(' + image + ')' }">
         </div>
         <div class='filter-container' v-dragscroll.x>
@@ -29,6 +29,11 @@ export default {
     },
     components: {
         'filter-type': FilterType,
+    },
+    methods: {
+        selectedFilter() {
+            return store.getters.filter;
+        },
     },
 }
 </script>

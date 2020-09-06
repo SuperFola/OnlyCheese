@@ -25,5 +25,6 @@ export default new Vuex.Store({
     getters: {
         loggedIn: () => true,  // TODO FIX ME
         image: store => store.image,
+        filter: store => store.selectedFilter,
     },
 });
