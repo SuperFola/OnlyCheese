@@ -6,6 +6,7 @@ import Router from 'vue-router';
 // components
 import Home from './components/Home';
 import EditImage from './components/EditImage';
+import ShareImage from './components/ShareImage';
 
 import store from './store';
 
@@ -27,6 +28,14 @@ let router = new Router({
             path: '/edit',
             name: 'edit',
             component: EditImage,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: '/share',
+            name: 'share',
+            component: ShareImage,
             meta: {
                 requiresAuth: true,
             },

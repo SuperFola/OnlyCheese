@@ -7,7 +7,7 @@
         <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>
             Next
         </router-link>
-        <router-link class='next-cta' v-if="$route.name === 'filters'" to='/'>
+        <router-link class='next-cta' v-if="$route.name === 'share'" to='/'>
             Share
         </router-link>
     </div>
