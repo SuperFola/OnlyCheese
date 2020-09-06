@@ -4,7 +4,7 @@
         <router-link class='cancel-cta' v-if="$route.name !== 'home'" to='/'>
             Cancel
         </router-link>
-        <router-link class='next-cta' v-if="$route.name === 'filters'" to='/share'>
+        <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>
             Next
         </router-link>
         <router-link class='next-cta' v-if="$route.name === 'filters'" to='/'>
