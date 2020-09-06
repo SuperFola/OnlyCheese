@@ -13,7 +13,6 @@
 import OnlycheesePost from './OnlycheesePost';
 
 import filters from '../data/filters';
-import EventBus from '../event-bus';
 
 export default {
     name: 'Home',
@@ -56,9 +55,6 @@ export default {
         return {
             posts,
             filters,
-            image: '',
-            selectedFilter: '',
-            caption: '',
         };
     },
     components: {
@@ -78,11 +74,6 @@ export default {
             this.posts.unshift(post);
             this.$router.push({ name: 'home', });
         },
-    },
-    created() {
-        EventBus.$on('filter-selected', evt => {
-            this.selectedFilter = evt.filter;
-        });
     },
 };
 </script>

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import EventBus from '../event-bus';
+import store from '../store';
 
 export default {
     name: 'FilterType',
@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         selectFilter() {
-            EventBus.$emit('filter-selected', { filter: this.filter.name, });
+            store.dispatch('saveFilter', this.filter.name);
         },
     },
 };

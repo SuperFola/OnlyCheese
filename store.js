@@ -12,18 +12,18 @@ export default new Vuex.Store({
         user: null,
 
         image: null,
+        selectedFilter: null,
     },
     mutations: {
-        saveImage(state, image) {
-            state.image = image;
-        },
+        saveImage(state, image) { state.image = image; },
+        saveFilter(state, filter) { state.selectedFilter = filter; },
     },
     actions: {
-        saveImage({commit}, image) {
-            commit('saveImage', image);
-        },
+        saveImage({commit}, image) { commit('saveImage', image); },
+        saveFilter({commit}, filter) { commit('saveFilter', filter); },
     },
     getters: {
         loggedIn: () => true,  // TODO FIX ME
+        image: store => store.image,
     },
 });

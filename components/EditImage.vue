@@ -15,10 +15,18 @@
 </template>
 
 <script>
+import store from '../store';
 import FilterType from './FilterType';
+import filters from '../data/filters';
 
 export default {
     name: 'EditImage',
+    data() {
+        return {
+            filters: filters,
+            image: store.getters.image,
+        };
+    },
     components: {
         'filter-type': FilterType,
     },
