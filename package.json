@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "vue": "^2.6.12",
     "vue-dragscroll": "^2.1.0"
   }
