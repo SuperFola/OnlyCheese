@@ -2,10 +2,10 @@
     <div class='onlycheese-post'>
         <div class='header level'>
             <div class='level-left'>
-            <figure class='image is-32x32'>
-                <img :src='post.userImage' />
-            </figure>
-            <span class='username'>{{ post.username }}</span>
+                <figure class='image is-32x32'>
+                    <img :src='post.userImage' />
+                </figure>
+                <span class='username'>{{ post.username }}</span>
             </div>
         </div>
         <div class='image-container'

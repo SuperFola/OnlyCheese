@@ -10,12 +10,22 @@
         <router-link class='next-cta' v-if="$route.name === 'share'" to='/'>
             Share
         </router-link>
+        <router-link class='next-cta' v-if="$route.name === 'home'" to='/profil'>
+            <figure class='image is-32x32 profilepicture'>
+                <img :src='userImage()' class='profilepicture' />
+            </figure>
+        </router-link>
     </div>
 </template>
 
 <script>
 export default {
     name: 'Header',
+    methods: {
+        userImage() {
+            return this.$store.getters.userImage;
+        },
+    },
 };
 </script>
 

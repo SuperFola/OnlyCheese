@@ -35,6 +35,17 @@ body,
     border-bottom: 1px solid #eeeeee;
     z-index: 99;
 
+    img.profilepicture {
+        border-radius: 99px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    figure.profilepicture {
+        border: 3px solid black;
+        border-radius: 99px;
+    }
+
     img {
         max-width: 120px;
         display: block;

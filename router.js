@@ -5,9 +5,11 @@ import Router from 'vue-router';
 
 // components
 import Login from './components/Login';
+import Signin from './components/Signin';
 import Home from './components/Home';
 import EditImage from './components/EditImage';
 import ShareImage from './components/ShareImage';
+import Profil from './components/Profil';
 
 import store from './store';
 
@@ -23,6 +25,14 @@ let router = new Router({
             path: '/login',
             name: 'login',
             component: Login,
+            meta: {
+                requiresNotLoggedIn: true,
+            },
+        },
+        {
+            path: '/signin',
+            name: 'signin',
+            component: Signin,
             meta: {
                 requiresNotLoggedIn: true,
             },
@@ -47,6 +57,14 @@ let router = new Router({
             path: '/share',
             name: 'share',
             component: ShareImage,
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: '/profil',
+            name: 'profil',
+            component: Profil,
             meta: {
                 requiresAuth: true,
             },
