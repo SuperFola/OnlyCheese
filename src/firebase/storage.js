@@ -6,12 +6,48 @@ import '@firebase/storage';
 export const Storage = App.storage();
 
 export function storeImageAsDataURL(folder, name, image) {
-    // TODO resize image to take less memory
-    let stoRef = Storage.ref();
-    let imgRef = stoRef.child(folder);
-    imgRef.fileName = name;
-    let spaceRef = imgRef.child(name);
-    spaceRef.putString(image, 'data_url');
+    // resize image
+    let newImage = new Image();
+    newImage.src = image;
+    newImage.onload = function() {
+        let maxWidth = 512,
+            maxHeight = 512,
+            imgWidth = newImage.width,
+            imgHeight = newImage.height;
+
+        if (imgWidth > imgHeight) {
+            if (imgWidth > maxWidth) {
+                imgHeight *= maxWidth / imgWidth;
+                imgWidth = maxWidth;
+            }
+        } else {
+            if (imgHeight > maxHeight) {
+                imgWidth *= maxHeight / imgHeight;
+                imgHeight = maxHeight;
+            }
+        }
+
+        let canvas = document.createElement('canvas');
+        canvas.width = imgWidth;
+        canvas.height = imgHeight;
+        newImage.width = imgWidth;
+        newImage.height = imgHeight;
+        let ctx = canvas.getContext('2d');
+        console.log(imgWidth);
+        console.log(imgHeight);
+        ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
+
+        // data_url images start with data:type;base64,data
+        // thus we can get the type using this small trick
+        image = canvas.toDataURL(image.split(';')[0].split(':')[1]);
+
+        // upload!
+        let stoRef = Storage.ref();
+        let imgRef = stoRef.child(folder);
+        imgRef.fileName = name;
+        let spaceRef = imgRef.child(name);
+        spaceRef.putString(image, 'data_url');
+    };
 }
 
 export async function retrieveImageURL(folder, name) {

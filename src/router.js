@@ -10,6 +10,7 @@ import Home       from './components/Home';
 import EditImage  from './components/EditImage';
 import ShareImage from './components/ShareImage';
 import Profile    from './components/Profile';
+import About      from './components/About';
 
 import store from './store';
 import config from './config';
@@ -67,6 +68,11 @@ let router = new Router({
             meta: {
                 requiresAuth: true,
             },
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: About,
         },
     ],
 });
