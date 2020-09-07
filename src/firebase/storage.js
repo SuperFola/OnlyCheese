@@ -33,8 +33,6 @@ export function storeImageAsDataURL(folder, name, image) {
         newImage.width = imgWidth;
         newImage.height = imgHeight;
         let ctx = canvas.getContext('2d');
-        console.log(imgWidth);
-        console.log(imgHeight);
         ctx.drawImage(this, 0, 0, imgWidth, imgHeight);
 
         // data_url images start with data:type;base64,data
