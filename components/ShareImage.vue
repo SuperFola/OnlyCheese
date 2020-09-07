@@ -21,6 +21,7 @@ export default {
     data() {
         return {
             image: this.$store.getters.image,
+            value: '',
         };
     },
     methods: {

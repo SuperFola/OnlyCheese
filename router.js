@@ -5,7 +5,7 @@ import Router from 'vue-router';
 
 // components
 import Login from './components/Login';
-import Signin from './components/Signin';
+import Signup from './components/Signup';
 import Home from './components/Home';
 import EditImage from './components/EditImage';
 import ShareImage from './components/ShareImage';
@@ -30,9 +30,9 @@ let router = new Router({
             },
         },
         {
-            path: '/signin',
-            name: 'signin',
-            component: Signin,
+            path: '/signup',
+            name: 'signup',
+            component: Signup,
             meta: {
                 requiresNotLoggedIn: true,
             },

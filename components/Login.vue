@@ -12,7 +12,7 @@
                         </div>
                         <div class='text-center'>
                             <mdb-btn @click.native.prevent='login'>Login</mdb-btn>
-                            <router-link to='/signin'>Sign in</router-link>
+                            <router-link to='/signup'>Sign up</router-link>
                         </div>
                     </form>
 
