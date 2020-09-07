@@ -52,6 +52,18 @@ export default new Vuex.Store({
         // -------------------------- login related -----------------------------
 
         signup({ commit }, authData) {
+            // error handling
+            if (!authData.firstname)
+                return 'First name must be provided';
+            if (!authData.lastname)
+                return 'Last name must be provided';
+            if (!authData.email)
+                return 'Email must be provided';
+            if (!authData.password)
+                return 'Password must be provided';
+            if (!authData.picture)
+                return 'A profile picture must be provided';
+
             Auth.createUserWithEmailAndPassword(authData.email, authData.password)
             .then(data => {
                 // save profile pic on firebase storage, + don't forget to resize it!!
