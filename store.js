@@ -66,9 +66,10 @@ export default new Vuex.Store({
                 commit('login', {});
 
                 // save user first/last name
-                DB.collection('users').doc(authData.email).set({
+                DB.collection('users').doc(data.user.uid).set({
                     firstname: authData.firstname,
                     lastname: authData.lastname,
+                    picture: data.user.uid,
                 });
 
                 this.dispatch('login', {
@@ -87,7 +88,7 @@ export default new Vuex.Store({
             .then(data => {
                 // retrieve user profile picture + login
                 retrieveURLFromRef(Storage.ref().child('images').child(data.user.uid), url => {
-                    DB.collection('users').doc(authData.email).get()
+                    DB.collection('users').doc(data.user.uid).get()
                     .then(doc => {
                         commit('login', {
                             idToken: data.user.uid,
@@ -114,8 +115,6 @@ export default new Vuex.Store({
         // -------------------------- posts related -----------------------------
 
         uploadImage() {
-            console.log('uploading...');
-
             // save profile pic on firebase storage, + don't forget to resize it!!
             let randomImgName = crypto.randomBytes(16).toString('hex');
 

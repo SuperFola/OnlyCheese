@@ -12,6 +12,8 @@
 <script>
 import OnlycheesePost from './OnlycheesePost';
 
+import { DB } from '../firebase/db';
+import { Storage } from '../firebase/storage';
 import filters from '../data/filters';
 
 export default {
@@ -29,27 +31,6 @@ export default {
                 caption: "When you're ready for summer '20 ☀️",
                 filter: "perpetua"
             },
-            {
-                username: "djirdehh",
-                userImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1211695/me2.png",
-                postImage:
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Cowgirl_Creamery_Point_Reyes_-_Red_Hawk_cheese.jpg/390px-Cowgirl_Creamery_Point_Reyes_-_Red_Hawk_cheese.jpg",
-                likes: 20,
-                hasBeenLiked: false,
-                caption: "Views from the six...",
-                filter: "clarendon"
-            },
-            {
-                username: "puppers",
-                userImage:
-                    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1211695/pug_personal.jpg",
-                postImage:
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/2015-01-06_Wiki_Loves_Cheese_Racletteessen_bei_WMAT_7654.jpg/1200px-2015-01-06_Wiki_Loves_Cheese_Racletteessen_bei_WMAT_7654.jpg",
-                likes: 49,
-                hasBeenLiked: true,
-                caption: "Current mood 🐶",
-                filter: "lofi"
-            }
         ];
 
         return {
@@ -61,19 +42,34 @@ export default {
         'onlycheese-post': OnlycheesePost,
     },
     methods: {
-        sharePost() {
-            // TODO fixe me and use firebase
-            const post = {
-                username: 'hello-world',
-                userImage: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/1211695/vue_lg_bg.png',
-                postImage: this.image,
-                likes: 0,
-                caption: this.caption,
-                filter: this.selectedFilter,
-            };
-            this.posts.unshift(post);
-            this.$router.push({ name: 'home', });
+        fetchPosts() {
+            DB.collection('posts').get().then(snapshot => {
+                snapshot.forEach(doc => {
+                    // get image link
+                    Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
+                        // get user details
+                        DB.collection('users').doc(doc.data().userId).get().then(user => {
+                            // get user profil picture
+                            Storage.ref().child('images').child(user.data().picture).getDownloadURL().then(pp => {
+                                // add post to the top
+                                this.posts.unshift({
+                                    username: `${user.data().firstname} ${user.data().lastname}`,
+                                    userImage: pp,
+                                    postImage: url,
+                                    likes: doc.data().likes,
+                                    hasBeenLiked: false,
+                                    caption: doc.data().caption,
+                                    filter: doc.data().filter,
+                                });
+                            });
+                        });
+                    });
+                });
+            });
         },
+    },
+    created() {
+        this.fetchPosts();
     },
 };
 </script>
