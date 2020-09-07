@@ -9,6 +9,7 @@
                 placeholder='Write a caption...'
                 type='text'
                 :value='value'
+                @change='setCaption'
                 @input="$emit('input', $event.target.value)">
             </textarea>
         </div>
@@ -27,6 +28,9 @@ export default {
     methods: {
         selectedFilter() {
             return this.$store.getters.filter;
+        },
+        setCaption(evt) {
+            this.$store.dispatch('saveCaption', evt.target.value);
         },
     },
 };

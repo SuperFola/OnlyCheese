@@ -7,14 +7,18 @@
         <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>
             Next
         </router-link>
-        <router-link class='next-cta' v-if="$route.name === 'share'" to='/'>
+        <a class='next-cta' v-if="$route.name === 'share'" @click='share'>
             Share
-        </router-link>
+        </a>
         <router-link class='next-cta' v-if="$route.name === 'home'" to='/profil'>
             <figure class='image is-32x32 profilepicture'>
                 <img :src='userImage()' class='profilepicture' />
             </figure>
         </router-link>
+        <a class='next-cta' v-if="$route.name === 'profil'"
+            @click='logout'>
+                Log out
+        </a>
     </div>
 </template>
 
@@ -24,6 +28,13 @@ export default {
     methods: {
         userImage() {
             return this.$store.getters.userImage;
+        },
+        logout() {
+            this.$store.dispatch('logout');
+        },
+        share() {
+            this.$store.dispatch('uploadImage');
+            this.$router.push({ name: 'home', });
         },
     },
 };

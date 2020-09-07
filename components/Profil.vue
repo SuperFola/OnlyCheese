@@ -1,10 +1,7 @@
 <template>
     <div class='phone-body'>
         <p>{{ fullname }}</p>
-        <a
-            @click='logout'>
-                Log out
-        </a>
+        <p>{{ email }}</p>
     </div>
 </template>
 
@@ -12,14 +9,8 @@
 export default {
     name: 'Profil',
     computed: {
-        fullname() {
-            return this.$store.getters.fullname;
-        },
-    },
-    methods: {
-        logout() {
-            this.$store.dispatch('logout');
-        },
+        fullname() { return this.$store.getters.fullname; },
+        email() { return this.$store.getters.email; },
     },
 };
 </script>
