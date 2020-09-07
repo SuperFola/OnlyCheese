@@ -2,7 +2,7 @@
     <div class='phone-body mt-5 p-5'>
         <mdb-container fluid grid-list-xl>
             <mdb-row>
-                <mdb-col col='4'></mdb-col>
+                <mdb-col col='4' v-if='error !== null'>{{ error }}</mdb-col>
                 <mdb-col col='4'>
                     <form>
                         <p class='h4 text-center mb-4'>Login</p>
@@ -38,6 +38,7 @@ export default {
         return {
             email: '',
             password: '',
+            error: '',
         };
     },
     components: {
@@ -49,10 +50,12 @@ export default {
     },
     methods: {
         login() {
-            this.$store.dispatch('login', {
+            let error = this.$store.dispatch('login', {
                 email: this.email,
                 password: this.password,
             });
+            if (error !== null)
+                this.error = error;
         },
     },
 };

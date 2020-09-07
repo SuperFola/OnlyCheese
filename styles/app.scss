@@ -134,10 +134,10 @@ body,
         right: 10px;
         top: 6px;
         p {
-        font-size: 0.63rem;
-        position: absolute;
-        left: -25px;
-        top: 5px;
+            font-size: 0.63rem;
+            position: absolute;
+            left: -25px;
+            top: 5px;
         }
     }
 
@@ -174,11 +174,5 @@ body,
     .phone-header,
     .phone-footer {
         width: 100%;
-    }
-}
-
-@media (max-height: $small) {
-    .app-phone {
-        transform: scale(0.6);
     }
 }

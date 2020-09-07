@@ -93,9 +93,16 @@ export default new Vuex.Store({
             .catch(error => {
                 console.log(error);
             });
+
+            return null;  // no error
         },
 
         login({ commit }, authData) {
+            if (!authData.email)
+                return 'Email must be provided';
+            if (!authData.password)
+                return 'Password must be provided';
+
             Auth.signInWithEmailAndPassword(authData.email, authData.password)
             .then(data => {
                 // retrieve user profile picture + login
@@ -115,6 +122,8 @@ export default new Vuex.Store({
             .catch(error => {
                 console.log(error.message);
             });
+
+            return null;  // no errors
         },
 
         logout({ commit }) {

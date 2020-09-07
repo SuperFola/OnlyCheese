@@ -2,7 +2,7 @@
     <div class='phone-body mt-5 p-5'>
         <mdb-container fluid grid-list-xl>
             <mdb-row>
-                <mdb-col col='4'></mdb-col>
+                <mdb-col col='4' v-if='error !== null'>{{ error }}</mdb-col>
                 <mdb-col col='4'>
                     <form>
                         <p class='h4 text-center mb-4'>Sign up</p>
@@ -48,6 +48,7 @@ export default {
             firstname: '',
             lastname: '',
             picture: '',
+            error : null,
         };
     },
     components: {
@@ -59,13 +60,15 @@ export default {
     },
     methods: {
         signup() {
-            this.$store.dispatch('signup', {
+            let error = this.$store.dispatch('signup', {
                 email: this.email,
                 password: this.password,
                 picture: this.picture,
                 firstname: this.firstname,
                 lastname: this.lastname,
             });
+            if (error !== null)
+                this.error = error;
         },
         uploadImage(evt) {
             const files = evt.target.files;
