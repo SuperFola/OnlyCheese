@@ -49,7 +49,7 @@ export default {
                     Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
                         // get user details
                         DB.collection('users').doc(doc.data().userId).get().then(user => {
-                            // get user profil picture
+                            // get user profile picture
                             Storage.ref().child('images').child(user.data().picture).getDownloadURL().then(pp => {
                                 // add post to the top
                                 this.posts.unshift({

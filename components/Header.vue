@@ -10,12 +10,12 @@
         <a class='next-cta' v-if="$route.name === 'share'" @click='share'>
             Share
         </a>
-        <router-link class='next-cta' v-if="$route.name === 'home'" to='/profil'>
+        <router-link class='next-cta' v-if="$route.name === 'home'" to='/profile'>
             <figure class='image is-32x32 profilepicture'>
                 <img :src='userImage()' class='profilepicture' />
             </figure>
         </router-link>
-        <a class='next-cta' v-if="$route.name === 'profil'"
+        <a class='next-cta' v-if="$route.name === 'profile'"
             @click='logout'>
                 Log out
         </a>

@@ -11,7 +11,7 @@
                             <mdb-input v-model='lastname' label='Last name' type='text' />
                             <mdb-input v-model='email' label='Your email' icon='envelope' type='email' />
                             <mdb-input v-model='password' label='Your password' icon='lock' type='password' />
-                            Profil picture
+                            Profile picture
                             <input type='file'
                                 name='file' id='file'
                                 class='inputfile'
@@ -20,6 +20,7 @@
                         </div>
                         <div class='text-center'>
                             <mdb-btn @click.native.prevent='signup'>Sign up</mdb-btn>
+                            <router-link to='/login'>Log in</router-link>
                         </div>
                     </form>
 

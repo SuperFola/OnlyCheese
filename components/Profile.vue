@@ -23,7 +23,7 @@ import { DB } from '../firebase/db';
 import { Storage } from '../firebase/storage';
 
 export default {
-    name: 'Profil',
+    name: 'Profile',
     data() {
         return {
             posts: [],
@@ -51,7 +51,7 @@ export default {
                         // get image link
                         Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
                             DB.collection('users').doc(doc.data().userId).get().then(user => {
-                                // get user profil picture
+                                // get user profile picture
                                 Storage.ref().child('images').child(user.data().picture).getDownloadURL().then(pp => {
                                     // add post to the top
                                     this.posts.unshift({

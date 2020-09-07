@@ -9,7 +9,7 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import EditImage from './components/EditImage';
 import ShareImage from './components/ShareImage';
-import Profil from './components/Profil';
+import Profile from './components/Profile';
 
 import store from './store';
 
@@ -62,9 +62,9 @@ let router = new Router({
             },
         },
         {
-            path: '/profil',
-            name: 'profil',
-            component: Profil,
+            path: '/profile',
+            name: 'profile',
+            component: Profile,
             meta: {
                 requiresAuth: true,
             },
