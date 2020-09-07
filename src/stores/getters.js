@@ -2,7 +2,7 @@
 
 export const getters = {
     loggedIn: store => !!store.user,
-    idToken: store => store.user.idToken,
+    userId: store => store.user.userId,
 
     image: store => store.image,
     filter: store => store.selectedFilter,

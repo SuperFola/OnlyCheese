@@ -47,7 +47,7 @@ export default {
             DB.collection('posts').get().then(snapshot => {
                 snapshot.forEach(doc => {
                     // get user details only for the current logged in user
-                    if (doc.data().userId === this.$store.getters.idToken) {
+                    if (doc.data().userId === this.$store.getters.userId) {
                         // get image link
                         Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
                             DB.collection('users').doc(doc.data().userId).get().then(user => {
