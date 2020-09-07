@@ -50,12 +50,13 @@ export default {
     },
     methods: {
         login() {
-            let error = this.$store.dispatch('login', {
+            this.$store.dispatch('login', {
                 email: this.email,
                 password: this.password,
+            }).then(msg => {
+                if (msg !== null)
+                    this.error = msg;
             });
-            if (error !== null)
-                this.error = error;
         },
     },
 };

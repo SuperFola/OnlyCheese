@@ -60,15 +60,16 @@ export default {
     },
     methods: {
         signup() {
-            let error = this.$store.dispatch('signup', {
+            this.$store.dispatch('signup', {
                 email: this.email,
                 password: this.password,
                 picture: this.picture,
                 firstname: this.firstname,
                 lastname: this.lastname,
+            }).then(msg => {
+                if (msg !== null)
+                    this.error = msg;
             });
-            if (error !== null)
-                this.error = error;
         },
         uploadImage(evt) {
             const files = evt.target.files;
