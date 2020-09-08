@@ -1,45 +1,68 @@
 <template>
-    <div class='phone-body mt-5 p-5'>
-        <mdb-container fluid grid-list-xl>
-            <mdb-row>
-                <mdb-col col='4' v-if='error !== null'>{{ error }}</mdb-col>
-                <mdb-col col='4'>
-                    <form>
-                        <p class='h4 text-center mb-4'>Sign up</p>
-                        <div class='grey-text'>
-                            <mdb-input v-model='firstname' label='First name' type='text' />
-                            <mdb-input v-model='lastname' label='Last name' type='text' />
-                            <mdb-input v-model='email' label='Your email' icon='envelope' type='email' />
-                            <mdb-input v-model='password' label='Your password' icon='lock' type='password' />
-                            Profile picture
-                            <input type='file'
-                                name='file' id='file'
-                                class='inputfile'
-                                accept='image/*'
-                                @change='uploadImage' />
-                        </div>
-                        <div class='text-center'>
-                            <mdb-btn @click.native.prevent='signup'>Sign up</mdb-btn>
-                            <router-link to='/login'>Log in</router-link>
-                        </div>
-                    </form>
-
-                </mdb-col>
-                <mdb-col col="4"></mdb-col>
-            </mdb-row>
-        </mdb-container>
+    <div class='phone-body'>
+        <p v-if='error !== null'>{{ error }}</p>
+        <div class='width-80-centered'>
+            <div class='field'>
+                <label class='label'>First name</label>
+                <div class='control'>
+                    <input v-model='firstname' class='input is-rounded' placeholder='John' type='text' />
+                </div>
+            </div>
+            <div class='field'>
+                <label class='label'>Last name</label>
+                <div class='control'>
+                    <input v-model='lastname' class='input is-rounded' placeholder='Doe' type='text' />
+                </div>
+            </div>
+            <div class='field'>
+                <label class='label'>Email</label>
+                <div class='control has-icons-left'>
+                    <input class='input is-rounded' placeholder='john@doe.com' v-model='email' type='email' />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+            <div class='field'>
+                <label class='label'>Password</label>
+                <div class='control has-icons-left'>
+                    <input class='input is-rounded' placeholder='******' v-model='password' type='password' />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+            </div>
+            <div class='field'>
+                <div class='file'>
+                    <label class='file-label'>
+                        <input type='file'
+                            class='file-input'
+                            accept='image/*'
+                            @change='uploadImage' />
+                        <span class='file-cta'>
+                            <span class='file-icon'>
+                                <i class='fas fa-upload'></i>
+                            </span>
+                            <span class='file-label'>
+                                Upload profile picture...
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class='field is-grouped'>
+                <div class='control'>
+                    <button class='button is-primary' @click='signup'>Sign up</button>
+                </div>
+                <div class='control'>
+                    <button class='button is-light' @click='login'>Log in</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import {
-        mdbContainer,
-        mdbRow,
-        mdbCol,
-        mdbInput,
-        mdbBtn
-    } from 'mdbvue';
-
 export default {
     name: 'Signup',
     data() {
@@ -51,13 +74,6 @@ export default {
             picture: '',
             error : null,
         };
-    },
-    components: {
-        mdbContainer,
-        mdbRow,
-        mdbCol,
-        mdbBtn,
-        mdbInput,
     },
     methods: {
         signup() {
@@ -71,6 +87,9 @@ export default {
                 if (msg !== null)
                     this.error = msg;
             });
+        },
+        login() {
+            this.$router.push({ name: 'login', });
         },
         uploadImage(evt) {
             const files = evt.target.files;
