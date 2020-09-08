@@ -11,4 +11,10 @@ export const getters = {
     userImage: store => store.user.userImage,
     fullname: store => store.user.name,
     email: store => store.user.email,
+
+    historyLastDiff(store) {
+        const reversed = store.history.slice().reverse();
+        const diff = reversed.findIndex(route => route !== reversed[0]);
+        return -1 * diff;
+    },
 };

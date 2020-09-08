@@ -3,9 +3,9 @@
         <router-link to='/about'>
             <img src='../images/onlycheese-logo.png' />
         </router-link>
-        <router-link class='cancel-cta' v-if="$route.name === 'edit' || $route.name === 'share'" to='/'>
+        <a class='cancel-cta' v-if='canShowCancel' @click='goBack'>
             Cancel
-        </router-link>
+        </a>
         <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>
             Next
         </router-link>
@@ -27,6 +27,13 @@
 <script>
 export default {
     name: 'Header',
+    computed: {
+        canShowCancel() {
+            return this.$route.name === 'edit'
+                || this.$route.name === 'share'
+                || this.$route.name === 'about';
+        },
+    },
     methods: {
         userImage() {
             return this.$store.getters.userImage;
@@ -37,6 +44,13 @@ export default {
         share() {
             this.$store.dispatch('uploadImage');
             this.$router.push({ name: 'home', });
+        },
+        goBack() {
+            // special behaviour to go back to the correct page
+            if (this.$router.name === 'about')
+                this.$router.go(this.$store.getters.historyLastDiff);
+            else
+                this.$router.push({ name: 'home', });
         },
     },
 };

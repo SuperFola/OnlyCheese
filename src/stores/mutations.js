@@ -22,4 +22,10 @@ export const mutations = {
         state.user = null;
     },
     // ------- END of user related ----------
+
+    // ------- history related ------------
+    historyPush(state, route) {
+        state.history.push(route);
+    },
+    // ------- END of history related -----------
 };

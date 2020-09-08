@@ -9,4 +9,7 @@ export const state = {
     selectedFilter: null,
     // a caption for the image
     caption: null,
+
+    // history stack
+    history: [],
 };

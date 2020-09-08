@@ -8,4 +8,9 @@ export const actions = {
     ...actionsImage,
     ...actionsLogin,
     ...actionsPost,
+
+    // history action
+    historyPush({ commit }, route) {
+        commit('historyPush', route);
+    },
 };

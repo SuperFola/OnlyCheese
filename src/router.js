@@ -98,4 +98,9 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+// save history
+router.afterEach(to => {
+    store.dispatch('historyPush', to.name);
+});
+
 export default router;
