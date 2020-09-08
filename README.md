@@ -25,14 +25,14 @@ touch config.json
 npm i
 npm i -g @vue/cli @vue/cli-service-global sass-loader sass
 # run with
-vue serve src/main.js
+vue serve main.js
 ```
 
 ## Deployment
 
 ```shell
 # build in dist/
-vue build src/main.js
+vue build main.js
 # deploy on firebase
 firebase deploy
 ```

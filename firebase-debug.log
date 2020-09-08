@@ -1,0 +1,68 @@
+[debug] [2020-09-08T22:39:27.811Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T22:39:27.812Z] Command:       /home/folaefolc/.node/bin/node /home/folaefolc/.node/bin/firebase deploy
+[debug] [2020-09-08T22:39:27.813Z] CLI Version:   8.10.0
+[debug] [2020-09-08T22:39:27.813Z] Platform:      linux
+[debug] [2020-09-08T22:39:27.813Z] Node Version:  v12.16.3
+[debug] [2020-09-08T22:39:27.813Z] Time:          Wed Sep 09 2020 00:39:27 GMT+0200 (Central European Summer Time)
+[debug] [2020-09-08T22:39:27.813Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T22:39:27.813Z] 
+[debug] [2020-09-08T22:39:27.817Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-08T22:39:27.817Z] > authorizing via signed-in user
+[debug] [2020-09-08T22:39:27.817Z] [iam] checking project only-cheese for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-09-08T22:39:27.819Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/only-cheese:testIamPermissions  
+ {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2020-09-08T22:39:28.790Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=562","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T22:39:28.791Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/only-cheese  
+ 
+[debug] [2020-09-08T22:39:29.298Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'only-cheese'...
+[info] 
+[info] i  deploying database, storage, firestore, hosting 
+[info] i  database: checking rules syntax... 
+[debug] [2020-09-08T22:39:29.310Z] >>> HTTP REQUEST PUT https://only-cheese.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": false,
+    ".write": false
+  }
+}
+[debug] [2020-09-08T22:39:30.113Z] <<< HTTP RESPONSE 200 {"server":"nginx","date":"Tue, 08 Sep 2020 22:39:30 GMT","content-type":"application/json; charset=utf-8","content-length":"15","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[info] ✔  database: rules syntax for database only-cheese is valid 
+[debug] [2020-09-08T22:39:30.115Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/only-cheese  
+ 
+[debug] [2020-09-08T22:39:30.627Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:31 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  firebase.storage: checking storage.rules for compilation errors... 
+[debug] [2020-09-08T22:39:30.629Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/only-cheese:test  
+ {"source":{"files":[{"name":"storage.rules","content":"rules_version = '2';\nservice firebase.storage {\n  match /b/{bucket}/o {\n    match /{allPaths=**} {\n      allow read, write: if request.auth!=null;\n    }\n  }\n}\n"}]}}
+[debug] [2020-09-08T22:39:31.655Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  firebase.storage: rules file storage.rules compiled successfully 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2020-09-08T22:39:31.662Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/only-cheese:test  
+ {"source":{"files":[{"name":"firestore.rules","content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if true;\n    }\n  }\n}"}]}}
+[debug] [2020-09-08T22:39:32.680Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:33 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2020-09-08T22:39:32.687Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/only-cheese/versions  
+ {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-09-08T22:39:34.314Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T22:39:34.319Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/only-cheese/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-09-08T22:39:35.140Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:35 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T22:39:35.144Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/only-cheese/rulesets/94c6ecab-1252-4896-9d48-dc90290db452  
+ 
+[debug] [2020-09-08T22:39:35.960Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  storage: latest version of storage.rules already up to date, skipping upload... 
+[debug] [2020-09-08T22:39:35.964Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/only-cheese/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-09-08T22:39:35.965Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/only-cheese/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2020-09-08T22:39:36.330Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:36 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T22:39:36.333Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/only-cheese/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2020-09-08T22:39:36.602Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] ✔  firestore: deployed indexes in firestore.indexes.json successfully 
+[debug] [2020-09-08T22:39:36.758Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 22:39:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T22:39:36.761Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/only-cheese/rulesets/9bd91e28-6416-456c-99c6-a8501871905f  
+ 

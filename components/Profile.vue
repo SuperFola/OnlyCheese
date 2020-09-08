@@ -19,6 +19,7 @@
                 :post='post'
                 :key='posts.indexOf(post)'>
             </onlycheese-post>
+            <br><br><br><br><br><br><br><br>
         </div>
     </div>
 </template>
