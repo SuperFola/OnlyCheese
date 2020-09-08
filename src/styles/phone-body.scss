@@ -20,6 +20,36 @@
     margin-right: -15px;
 }
 
+.profilepicture {
+    display: inline-block;
+}
+
+img.profilepicture {
+    border-radius: 99px;
+    vertical-align: top;
+}
+
+figure.profilepicture {
+    border: 3px solid black;
+    border-radius: 99px;
+}
+
+.profiletoppic {
+    vertical-align: top;
+    padding-top: 10px;
+    margin-right: 20px;
+}
+
+.profiletop {
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.profiletext {
+    display: inline-block;
+    width: max-content;
+}
+
 .caption-container {
     height: 210px;
     display: flex;

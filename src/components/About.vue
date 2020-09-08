@@ -1,6 +1,7 @@
 <template>
     <div class='phone-body'>
-        coucou
+        <div class='width-90-centered'>
+        </div>
     </div>
 </template>
 

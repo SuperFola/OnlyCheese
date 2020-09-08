@@ -1,13 +1,19 @@
 <template>
     <div class='phone-body'>
-        <div>
-            <h2>Account details</h2>
-            <p>These are not shown to the public</p>
-            <p>Name: {{ fullname }}</p>
-            <p>Email: {{ email }}</p>
-            <p>Total received likes: {{ received_likes }}</p>
+        <div class='width-90-centered'>
+            <div class='profiletoppic profilepicture'>
+                <figure class='image is-64x64 profilepicture'>
+                    <img :src='userImage' class='profilepicture' />
+                </figure>
+            </div>
+            <div class='profiletext profiletop'>
+                <u><p>{{ fullname }}</p></u>
+                <p>{{ email }}</p>
+                <div>
+                    <b>Total likes received</b>: {{ received_likes }}
+                </div>
+            </div>
         </div>
-        <h2>{{ fullname }} posts</h2>
         <div class='feed' v-dragscroll.y>
             <onlycheese-post v-for='post in posts'
                 :post='post'
@@ -33,6 +39,7 @@ export default {
     computed: {
         fullname() { return this.$store.getters.fullname; },
         email() { return this.$store.getters.email; },
+        userImage() { return this.$store.getters.userImage; },
     },
     components: {
         'onlycheese-post': OnlycheesePost,
@@ -52,10 +59,10 @@ export default {
                         Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
                             DB.collection('users').doc(doc.data().userId).get().then(user => {
                                 // get user profile picture
-                                Storage.ref().child('images').child(user.data().picture).getDownloadURL().then(pp => {
+                                Storage.ref().child('images').child(this.$store.getters.userId).getDownloadURL().then(pp => {
                                     // add post to the top
                                     this.posts.unshift({
-                                        username: `${user.data().firstname} ${user.data().lastname}`,
+                                        username: user.data().nickname,
                                         userImage: pp,
                                         postImage: url,
                                         likes: doc.data().likes,

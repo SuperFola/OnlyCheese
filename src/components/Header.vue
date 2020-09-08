@@ -14,7 +14,7 @@
         </a>
         <router-link class='next-cta' v-if="$route.name === 'home'" to='/profile'>
             <figure class='image is-32x32 profilepicture'>
-                <img :src='userImage()' class='profilepicture' />
+                <img :src='userImage' class='profilepicture' />
             </figure>
         </router-link>
         <a class='next-cta' v-if="$route.name === 'profile'"
@@ -33,11 +33,9 @@ export default {
                 || this.$route.name === 'share'
                 || this.$route.name === 'about';
         },
+        userImage() { return this.$store.getters.userImage; },
     },
     methods: {
-        userImage() {
-            return this.$store.getters.userImage;
-        },
         logout() {
             this.$store.dispatch('logout');
         },
