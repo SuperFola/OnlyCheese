@@ -54,9 +54,9 @@ export default {
             this.$store.dispatch('login', {
                 email: this.email,
                 password: this.password,
-            }).then(msg => {
-                if (msg !== null)
-                    this.error = msg;
+                on_error: error => {
+                    this.error = error;
+                },
             });
         },
         signup() {

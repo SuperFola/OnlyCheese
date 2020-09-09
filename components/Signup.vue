@@ -90,9 +90,9 @@ export default {
                 picture: this.picture,
                 firstname: this.firstname,
                 lastname: this.lastname,
-            }).then(msg => {
-                if (msg !== null)
-                    this.error = msg;
+                on_error: error => {
+                    this.error = error;
+                },
             });
         },
         login() {

@@ -8,11 +8,26 @@ import router from '../router';
 export const actionsLogin = {
     signup({ commit }, authData) {
         // error handling
-        if (!authData.firstname)    return 'First name must be provided';
-        if (!authData.lastname)     return 'Last name must be provided';
-        if (!authData.email)        return 'Email must be provided';
-        if (!authData.password)     return 'Password must be provided';
-        if (!authData.picture)      return 'A profile picture must be provided';
+        if (!authData.firstname) {
+            authData.on_error('First name must be provided');
+            return;
+        }
+        if (!authData.lastname) {
+            authData.on_error('Last name must be provided');
+            return;
+        }
+        if (!authData.email) {
+            authData.on_error('Email must be provided');
+            return;
+        }
+        if (!authData.password) {
+            authData.on_error('Password must be provided');
+            return;
+        }
+        if (!authData.picture) {
+            authData.on_error('A profile picture must be provided');
+            return;
+        }
 
         signUpEmailPassword(authData.email, authData.password,
             userId => {
@@ -27,17 +42,20 @@ export const actionsLogin = {
                 });
             },
             error => {
-                // TODO improve error management
-                console.log(error.message);
+                authData.on_error(error.message);
             },
         );
-
-        return null;  // no errors
     },
 
     login({ commit }, authData) {
-        if (!authData.email)        return 'Email must be provided';
-        if (!authData.password)     return 'Password must be provided';
+        if (!authData.email) {
+            authData.on_error('Email must be provided');
+            return;
+        }
+        if (!authData.password) {
+            authData.on_error('Password must be provided');
+            return;
+        }
 
         logInEmailPassword(authData.email, authData.password,
             async userId => {
@@ -55,12 +73,9 @@ export const actionsLogin = {
                 router.push({ name: 'home', });
             },
             error => {
-                // TODO improve error management
-                console.log(error.message);
+                authData.on_error(error.message);
             },
         );
-
-        return null;  // no errors
     },
 
     logout({ commit }) {
