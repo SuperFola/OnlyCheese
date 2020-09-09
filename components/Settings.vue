@@ -87,6 +87,7 @@ export default {
     },
     methods: {
         saveSettings() {
+            // setting new password if asked for
             if (this.password !== '') {
                 if (this.password_new.length < 6) {
                     this.error = 'New password must contain at least 6 characters';

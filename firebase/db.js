@@ -13,6 +13,17 @@ export function saveNewPost(imageName, fromUserId, caption, filter) {
         caption: caption,
         filter: filter,
     });
+
+    // save post in user profile
+    DB.collection('users').doc(fromUserId).get()
+    .then(data => {
+        let new_data = data.data();
+        if (!new_data.posts)
+            new_data.posts = [imageName];
+        else
+            new_data.posts.unshift(imageName);
+        DB.collection('users').doc(fromUserId).set(new_data);
+    });
 }
 
 export function saveNewUser(userId, firstname, lastname) {
@@ -20,7 +31,18 @@ export function saveNewUser(userId, firstname, lastname) {
         firstname: firstname,
         lastname: lastname,
         nickname: `${firstname} ${lastname}`,
+        posts: [],
     });
+}
+
+export async function deleteUser(userId) {
+    let user = await retrieveUserData(userId);
+    if (user.data().posts.length > 0) {
+        for (let i=0; i < posts.length; ++i) {
+            await DB.collections('posts').doc(posts[i]).delete();
+        }
+    }
+    DB.collection('users').doc(userId).delete();
 }
 
 export async function retrieveUserData(userId) {

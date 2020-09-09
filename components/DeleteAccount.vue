@@ -24,6 +24,7 @@
 
 <script>
 import { Auth } from '../firebase/auth';
+import { deleteUser } from '../firebase/db';
 
 export default {
     name: 'DeleteAccount',
@@ -35,10 +36,16 @@ export default {
     },
     methods: {
         deleteAccount() {
+            // finally delete the user account
             Auth.currentUser.reauthenticateWithCredentials({
                 email: this.$store.getters.email,
                 password: this.password,
             }).then(() => {
+                // check for the right password first
+                // and then delete user data from firebase as well
+                deleteUser(this.$store.getters.userId);
+
+                // delete it from the user auth db
                 Auth.currentUser.delete()
                 .then(() => {
                     this.$router.push({ name: 'login', });
