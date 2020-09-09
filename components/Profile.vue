@@ -7,13 +7,11 @@
                 </figure>
             </div>
             <div class='profiletext profiletop'>
-                <h1 class='is-size-4'>{{ fullname }}</h1>
-                <div>
-                    <b>Total likes received</b>: {{ received_likes }}
-                </div>
+                <h1 class='is-size-4'>{{ nickname }}</h1>
+                <b>Total likes received</b>: {{ received_likes }}
             </div>
         </div>
-        <div class='tabs is-small is-centered is-boxed'>
+        <div class='tabs is-fullwidth' style='margin-bottom: 10px;'>
             <ul>
                 <li
                     :class="tab === 'feed' ? 'is-active' : ''"
@@ -38,6 +36,56 @@
                 :key='posts.indexOf(post)'>
             </onlycheese-post>
         </div>
+        <div class='settings' v-show="tab === 'settings'" v-dragscroll.y>
+            <div class='container'>
+                <div class='notification'>
+                    <div class='field'>
+                        <label class='label'>Nickname</label>
+                        <div class='control has-icons-left'>
+                            <input class='input is-rounded' :placeholder='nickname' v-model='new_nickname' type='text' />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-user-tag"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='notification'>
+                    <div class='field'>
+                        <label class='label'>Old password</label>
+                        <div class='control has-icons-left'>
+                            <input class='input is-rounded' placeholder='******' v-model='password' type='password' />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='field'>
+                        <label class='label'>New password</label>
+                        <div class='control has-icons-left'>
+                            <input class='input is-rounded' placeholder='******' v-model='password_new' type='password' />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='field'>
+                        <label class='label'>Repeat new password</label>
+                        <div class='control has-icons-left'>
+                            <input class='input is-rounded' placeholder='******' v-model='password_new_bis' type='password' />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='field'>
+                <br>
+                <div class='control'>
+                    <button class='button is-primary' @click='saveSettings'>Save</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -53,10 +101,15 @@ export default {
             posts: [],
             received_likes: 0,
             tab: 'feed',
+
+            new_nickname: '',
+            password: '',
+            password_new: '',
+            password_new_bis : '',
         };
     },
     computed: {
-        fullname() { return this.$store.getters.fullname; },
+        nickname() { return this.$store.getters.nickname; },
         userImage() { return this.$store.getters.userImage; },
     },
     components: {
@@ -68,6 +121,9 @@ export default {
         },
         showSettings() {
             this.tab = 'settings';
+        },
+        saveSettings() {
+            //
         },
         listPosts() {
             // reset data first

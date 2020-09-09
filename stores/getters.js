@@ -9,7 +9,7 @@ export const getters = {
     caption: store => store.caption,
 
     userImage: store => store.user.userImage,
-    fullname: store => store.user.name,
+    nickname: store => store.user.name,
     email: store => store.user.email,
 
     historyLastDiff(store) {
