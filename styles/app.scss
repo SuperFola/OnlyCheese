@@ -146,6 +146,14 @@ body,
         cursor: pointer;
         z-index: 99;
     }
+
+    .center {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        font-size: 0.8em;
+        line-height: 1.2em;
+    }
 }
 
 .fade-leave-active {

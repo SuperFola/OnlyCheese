@@ -3,9 +3,9 @@
         <router-link to='/about'>
             <img src='../images/onlycheese-logo.png' />
         </router-link>
-        <a class='cancel-cta' v-if='canShowCancel' @click='goBack'>
+        <span class='cancel-cta' v-if='canShowCancel' @click='goBack'>
             Cancel
-        </a>
+        </span>
         <router-link class='next-cta' v-if="$route.name === 'edit'" to='/share'>
             Next
         </router-link>
