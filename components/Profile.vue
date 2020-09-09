@@ -54,10 +54,10 @@ export default {
             posts: [],
             received_likes: 0,
             tab: 'feed',
+            nickname: this.$store.getters.nickname,
         };
     },
     computed: {
-        nickname() { return this.$store.getters.nickname; },
         userImage() { return this.$store.getters.userImage; },
     },
     components: {

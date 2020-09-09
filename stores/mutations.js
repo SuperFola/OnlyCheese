@@ -15,7 +15,7 @@ export const mutations = {
 
     // ------- user related ----------
     updateNickname(state, nickname) {
-        state.user.nickname = nickname;
+        state.user.name = nickname;
     },
     login(state, userData) {
         state.user = userData;

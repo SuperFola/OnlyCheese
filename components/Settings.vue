@@ -78,17 +78,17 @@ export default {
     name: 'Settings',
     data() {
         return {
+            nickname: this.$store.getters.nickname,
             new_nickname: '',
 
             password: '',
             password_new: '',
             password_new_bis : '',
 
-            error: '',
+            error: null,
         };
     },
     computed: {
-        nickname() { return this.$store.getters.nickname; },
         joined_date() { return 'December 2020'; },
     },
     methods: {
@@ -112,10 +112,12 @@ export default {
                 }
             }
             // update nickname if modified
-            if (this.nickname !== '') {
-                updateUser({ nickname: this.nickname, });
+            if (this.new_nickname !== '') {
+                updateUser(this.$store.getters.userId, { nickname: this.new_nickname, });
                 // update in our store
-                this.$store.dispatch('updateNickname', this.nickname);
+                this.$store.dispatch('updateNickname', this.new_nickname);
+
+                this.$router.push({ name: 'home', });
             }
         },
         deleteAccount() {
