@@ -42,6 +42,9 @@ export default {
                 Auth.currentUser.delete()
                 .then(() => {
                     this.$router.push({ name: 'login', });
+                })
+                .catch(error => {
+                    this.error_msg = 'An error occured while trying to delete the account: ' + error.message;
                 });
             }).catch(() => {
                 this.error_msg = 'Wrong password or couldn\'t reach the server';
