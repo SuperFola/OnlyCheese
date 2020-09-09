@@ -36,61 +36,14 @@
                 :key='posts.indexOf(post)'>
             </onlycheese-post>
         </div>
-        <div class='settings' v-show="tab === 'settings'" v-dragscroll.y>
-            <div class='container'>
-                <div class='notification'>
-                    <div class='field'>
-                        <label class='label'>Nickname</label>
-                        <div class='control has-icons-left'>
-                            <input class='input is-rounded' :placeholder='nickname' v-model='new_nickname' type='text' />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-user-tag"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class='notification'>
-                    <div class='field'>
-                        <label class='label'>Old password</label>
-                        <div class='control has-icons-left'>
-                            <input class='input is-rounded' placeholder='******' v-model='password' type='password' />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class='field'>
-                        <label class='label'>New password</label>
-                        <div class='control has-icons-left'>
-                            <input class='input is-rounded' placeholder='******' v-model='password_new' type='password' />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class='field'>
-                        <label class='label'>Repeat new password</label>
-                        <div class='control has-icons-left'>
-                            <input class='input is-rounded' placeholder='******' v-model='password_new_bis' type='password' />
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class='field'>
-                <br>
-                <div class='control'>
-                    <button class='button is-primary' @click='saveSettings'>Save</button>
-                </div>
-            </div>
-        </div>
+        <settings v-show="tab === 'settings'" />
     </div>
 </template>
 
 <script>
 import OnlycheesePost from './OnlycheesePost';
+import Settings from './Settings';
+
 import { DB } from '../firebase/db';
 import { Storage } from '../firebase/storage';
 
@@ -101,11 +54,6 @@ export default {
             posts: [],
             received_likes: 0,
             tab: 'feed',
-
-            new_nickname: '',
-            password: '',
-            password_new: '',
-            password_new_bis : '',
         };
     },
     computed: {
@@ -114,6 +62,7 @@ export default {
     },
     components: {
         'onlycheese-post': OnlycheesePost,
+        'settings': Settings,
     },
     methods: {
         showFeed() {
@@ -121,9 +70,6 @@ export default {
         },
         showSettings() {
             this.tab = 'settings';
-        },
-        saveSettings() {
-            //
         },
         listPosts() {
             // reset data first
