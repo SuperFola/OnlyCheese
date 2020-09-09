@@ -15,6 +15,6 @@ export const getters = {
     historyLastDiff(store) {
         const reversed = store.history.slice().reverse();
         const diff = reversed.findIndex(route => route !== reversed[0]);
-        return -1 * diff;
+        return reversed[diff];
     },
 };

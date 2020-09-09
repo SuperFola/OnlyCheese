@@ -31,7 +31,8 @@ export default {
         canShowCancel() {
             return this.$route.name === 'edit'
                 || this.$route.name === 'share'
-                || this.$route.name === 'about';
+                || this.$route.name === 'about'
+                || this.$route.name === 'delete';
         },
         userImage() { return this.$store.getters.userImage; },
     },
@@ -46,7 +47,7 @@ export default {
         goBack() {
             // special behaviour to go back to the correct page
             if (this.$router.name === 'about')
-                this.$router.go(this.$store.getters.historyLastDiff);
+                this.$router.push({ name: this.$store.getters.historyLastDiff, });
             else
                 this.$router.push({ name: 'home', });
         },

@@ -11,6 +11,7 @@ import EditImage  from './components/EditImage';
 import ShareImage from './components/ShareImage';
 import Profile    from './components/Profile';
 import About      from './components/About';
+import DeleteAccount from './components/DeleteAccount';
 
 import store from './store';
 import config from './config';
@@ -73,6 +74,14 @@ let router = new Router({
             path: '/about',
             name: 'about',
             component: About,
+        },
+        {
+            path: '/delete_my_account',
+            name: 'delete',
+            component: DeleteAccount,
+            meta: {
+                requiresAuth: true,
+            },
         },
     ],
 });
