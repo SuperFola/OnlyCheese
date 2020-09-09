@@ -14,6 +14,9 @@ export const mutations = {
     // ------- END of image related ----------
 
     // ------- user related ----------
+    updateNickname(state, nickname) {
+        state.user.nickname = nickname;
+    },
     login(state, userData) {
         state.user = userData;
     },

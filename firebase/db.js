@@ -35,9 +35,19 @@ export function saveNewUser(userId, firstname, lastname) {
     });
 }
 
+export async function updateUser(userId, content) {
+    let user = await retrieveUserData(userId);
+    let data = user.data();
+    Object.keys(content).forEach(key => {
+        data[key] = content[key];
+    });
+    await DB.collection('users').doc(userId).set(data);
+}
+
 export async function deleteUser(userId) {
     let user = await retrieveUserData(userId);
-    if (user.data().posts.length > 0) {
+    let posts = user.data().posts;
+    if (posts.length > 0) {
         for (let i=0; i < posts.length; ++i) {
             await DB.collections('posts').doc(posts[i]).delete();
         }

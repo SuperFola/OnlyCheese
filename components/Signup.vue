@@ -1,7 +1,14 @@
 <template>
     <div class='phone-body'>
-        <p v-if='error !== null'>{{ error }}</p>
         <div class='width-80-centered'>
+            <div class='container' v-if='error !== null'>
+                <div class='notification is-danger'>
+                    <button class='delete' @click="error = null"></button>
+                    {{ error }}
+                </div>
+                <br>
+            </div>
+
             <div class='field'>
                 <label class='label'>First name</label>
                 <div class='control'>

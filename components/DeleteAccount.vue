@@ -1,8 +1,15 @@
 <template>
     <div class='phone-body'>
         <div class='container width-90-centered center-vertical'>
+            <div class='container' v-if='error_msg !== null'>
+                <div class='notification is-danger'>
+                    <button class='delete' @click="error_msg = null"></button>
+                    {{ error_msg }}
+                </div>
+                <br>
+            </div>
+
             <div class='notification'>
-                <p v-if="error_msg !== ''">{{ error_msg }}</p>
                 <div class='field'>
                     <label class='label'>Enter your password to confirm</label>
                     <div class='control has-icons-left'>
@@ -31,7 +38,7 @@ export default {
     data() {
         return {
             password: '',
-            error_msg: '',
+            error_msg: null,
         };
     },
     methods: {

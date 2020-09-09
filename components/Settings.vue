@@ -16,8 +16,13 @@
                     </div>
                 </div>
             </div>
+
+            <div class='notification is-danger' v-if='error !== null'>
+                <button class='delete' @click="error = null"></button>
+                {{ error }}
+            </div>
+
             <div class='notification'>
-                <p v-if="error !== ''">{{ error }}</p>
                 <div class='field'>
                     <label class='label'>Old password</label>
                     <div class='control has-icons-left'>
@@ -67,6 +72,7 @@
 
 <script>
 import { Auth } from '../firebase/auth';
+import { updateUser } from '../firebase/db';
 
 export default {
     name: 'Settings',
@@ -104,6 +110,12 @@ export default {
                 } else {
                     this.error = 'One or more new password field are empty';
                 }
+            }
+            // update nickname if modified
+            if (this.nickname !== '') {
+                updateUser({ nickname: this.nickname, });
+                // update in our store
+                this.$store.dispatch('updateNickname', this.nickname);
             }
         },
         deleteAccount() {
