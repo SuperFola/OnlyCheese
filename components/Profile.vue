@@ -7,19 +7,36 @@
                 </figure>
             </div>
             <div class='profiletext profiletop'>
-                <u><p>{{ fullname }}</p></u>
-                <p>{{ email }}</p>
+                <h1 class='is-size-4'>{{ fullname }}</h1>
                 <div>
                     <b>Total likes received</b>: {{ received_likes }}
                 </div>
             </div>
         </div>
-        <div class='feed' v-dragscroll.y>
+        <div class='tabs is-small is-centered is-boxed'>
+            <ul>
+                <li
+                    :class="tab === 'feed' ? 'is-active' : ''"
+                    @click='showFeed'>
+                    <a>
+                        <span class='icon is-small'><i class='fas fa-image' aria-hidden='true'></i></span>
+                        <span>My posts</span>
+                    </a>
+                </li>
+                <li :class="tab === 'settings' ? 'is-active' : ''"
+                    @click='showSettings'>
+                    <a>
+                        <span class='icon is-small'><i class='fas fa-user-cog' aria-hidden='true'></i></span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class='feed' v-show="tab === 'feed'" v-dragscroll.y>
             <onlycheese-post v-for='post in posts'
                 :post='post'
                 :key='posts.indexOf(post)'>
             </onlycheese-post>
-            <br><br><br><br><br><br><br><br>
         </div>
     </div>
 </template>
@@ -35,17 +52,23 @@ export default {
         return {
             posts: [],
             received_likes: 0,
+            tab: 'feed',
         };
     },
     computed: {
         fullname() { return this.$store.getters.fullname; },
-        email() { return this.$store.getters.email; },
         userImage() { return this.$store.getters.userImage; },
     },
     components: {
         'onlycheese-post': OnlycheesePost,
     },
     methods: {
+        showFeed() {
+            this.tab = 'feed';
+        },
+        showSettings() {
+            this.tab = 'settings';
+        },
         listPosts() {
             // reset data first
             this.posts = [];
