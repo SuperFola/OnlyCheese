@@ -1,6 +1,6 @@
 <template>
     <div class='phone-footer'>
-        <router-link to='/' class='home-cta' v-if="$route.name !== 'login' && $route.name !== 'signup'">
+        <router-link to='/' class='home-cta' v-if='!isLoginOrSignup'>
             <i class='fas fa-home fa-lg'></i>
         </router-link>
         <div class='center' v-if='isLoginOrSignup'>
