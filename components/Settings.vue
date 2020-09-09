@@ -5,6 +5,10 @@
                 <label class='label'>Account details</label>
                 <p>Joined in {{ joined_date }}</p>
             </div>
+            <div class='notification' :class='"is-" + type' v-if='message !== null'>
+                <button class='delete' @click="message = null"></button>
+                {{ message }}
+            </div>
             <div class='notification'>
                 <div class='field'>
                     <label class='label'>Nickname</label>
@@ -16,12 +20,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class='notification is-danger' v-if='error !== null'>
-                <button class='delete' @click="error = null"></button>
-                {{ error }}
-            </div>
-
             <div class='notification'>
                 <div class='field'>
                     <label class='label'>Old password</label>
@@ -71,7 +69,8 @@
 </template>
 
 <script>
-import { Auth } from '../firebase/auth';
+import { logInEmailPassword } from '../firebase/auth';
+import firebase from 'firebase';
 import { updateUser } from '../firebase/db';
 
 export default {
@@ -85,7 +84,8 @@ export default {
             password_new: '',
             password_new_bis : '',
 
-            error: null,
+            message: null,
+            type: 'danger',
         };
     },
     computed: {
@@ -96,19 +96,23 @@ export default {
             // setting new password if asked for
             if (this.password !== '') {
                 if (this.password_new.length < 6) {
-                    this.error = 'New password must contain at least 6 characters';
-                } else if (this.password_new !== '' && this.password_new === this.password_new_bis) {
-                    Auth.currentUser.reauthenticateWithCredentials({
-                        email: this.$store.getters.email,
-                        password: this.password,
-                    }).then(() => {
-                        Auth.currentUser.updatePassword()
-                        .then(() => {
-                            this.$router.push({ name: 'login', });
-                        });
-                    });
+                    this.message = 'New password must contain at least 6 characters';
+                    this.type = 'danger';
+                } else if (this.password_new !== '' && this.password_new !== this.password_new_bis) {
+                    this.message = 'The password don\'t match';
+                    this.type = 'danger';
                 } else {
-                    this.error = 'One or more new password field are empty';
+                    logInEmailPassword(this.$store.getters.email, this.password,
+                        async () => {
+                            firebase.auth().currentUser.updatePassword(this.password_new);
+                            this.message = 'Password updated';
+                            this.type = 'success';
+                        },
+                        error => {
+                            this.message = error.message;
+                            this.type = 'danger';
+                        },
+                    );
                 }
             }
             // update nickname if modified
@@ -117,7 +121,8 @@ export default {
                 // update in our store
                 this.$store.dispatch('updateNickname', this.new_nickname);
 
-                this.$router.push({ name: 'home', });
+                this.message = 'Nickname updated';
+                this.type = 'success';
             }
         },
         deleteAccount() {

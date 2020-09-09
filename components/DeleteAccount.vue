@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { Auth } from '../firebase/auth';
+import firebase from 'firebase';
+import { logInEmailPassword } from '../firebase/auth';
 import { deleteUser } from '../firebase/db';
 
 export default {
@@ -44,25 +45,27 @@ export default {
     methods: {
         deleteAccount() {
             // finally delete the user account
-            Auth.currentUser.reauthenticateWithCredentials({
-                email: this.$store.getters.email,
-                password: this.password,
-            }).then(() => {
-                // check for the right password first
-                // and then delete user data from firebase as well
-                deleteUser(this.$store.getters.userId);
+            logInEmailPassword(this.$store.getters.email, this.password,
+                async userId => {
+                    // check for the right password first
+                    // and then delete user data from firebase as well
+                    deleteUser(userId);
 
-                // delete it from the user auth db
-                Auth.currentUser.delete()
-                .then(() => {
-                    this.$router.push({ name: 'login', });
-                })
-                .catch(error => {
-                    this.error_msg = 'An error occured while trying to delete the account: ' + error.message;
-                });
-            }).catch(() => {
-                this.error_msg = 'Wrong password or couldn\'t reach the server';
-            });
+                    // delete it from the user auth db
+                    firebase.auth().currentUser.delete()
+                    .then(() => {
+                        this.$store.dispatch('logout');
+                        this.$router.push({ name: 'login', });
+                    })
+                    .catch(error => {
+                        this.error_msg = 'An error occured while trying to delete the account: ' + error.message;
+                    });
+                },
+                error => {
+                    this.message = error.message;
+                    this.type = 'danger';
+                },
+            );
         },
     },
 };

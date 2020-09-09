@@ -2,6 +2,7 @@
 
 import {App} from './app';
 import '@firebase/firestore';
+import { deleteImage } from './db';
 
 export const DB = App.firestore();
 
@@ -49,10 +50,12 @@ export async function deleteUser(userId) {
     let posts = user.data().posts;
     if (posts.length > 0) {
         for (let i=0; i < posts.length; ++i) {
-            await DB.collections('posts').doc(posts[i]).delete();
+            await deleteImage('posts', posts[i]);
+            await DB.collection('posts').doc(posts[i]).delete();
         }
     }
-    DB.collection('users').doc(userId).delete();
+    await deleteImage('images', userId);
+    await DB.collection('users').doc(userId).delete();
 }
 
 export async function retrieveUserData(userId) {

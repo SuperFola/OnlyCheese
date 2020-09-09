@@ -48,6 +48,10 @@ export function storeImageAsDataURL(folder, name, image) {
     };
 }
 
+export async function deleteImage(folder, name) {
+    return await Storage.ref().child(folder).child(name).delete();
+}
+
 export async function retrieveImageURL(folder, name) {
     // we assume the images we want always exist
     // if you have a strange BUG with IMAGE,
