@@ -1,0 +1,20 @@
+.settings {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: auto;
+}
+
+.settings-field {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.settings-save-btn {
+    padding-top: 20px;
+}
+
+.settings-field:last-child {
+    padding-top: 40px;
+    margin-bottom: 250px;
+}

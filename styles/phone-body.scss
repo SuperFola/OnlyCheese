@@ -2,11 +2,76 @@
     height: 100%;
 }
 
+.width-80-centered {
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+}
+
+.width-90-centered {
+    width: 90%;
+    margin: auto;
+}
+
+.center-vertical {
+    margin-top: 50%;
+    margin-bottom: 50%;
+}
+
+.about {
+    height: 100%;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.about-section {
+    padding-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.about-section:last-child {
+    margin-bottom: 120px;
+}
+
 .feed {
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-right: -15px;
+}
+
+.profilepicture {
+    display: inline-block;
+}
+
+img.profilepicture {
+    border-radius: 99px;
+    vertical-align: top;
+}
+
+figure.profilepicture {
+    border: 3px solid black;
+    border-radius: 99px;
+}
+
+.profiletoppic {
+    vertical-align: top;
+    padding-top: 10px;
+    margin-right: 20px;
+    max-width: 30%;
+}
+
+.profiletop {
+    vertical-align: top;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.profiletext {
+    display: inline-block;
+    width: max-content;
 }
 
 .caption-container {

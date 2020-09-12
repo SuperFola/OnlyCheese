@@ -1,24 +1,49 @@
 <template>
     <div class='phone-body'>
-        <div>
-            <h2>Account details</h2>
-            <p>These are not shown to the public</p>
-            <p>Name: {{ fullname }}</p>
-            <p>Email: {{ email }}</p>
-            <p>Total received likes: {{ received_likes }}</p>
+        <div class='width-90-centered'>
+            <div class='profiletoppic profilepicture'>
+                <figure class='image is-64x64 profilepicture'>
+                    <img :src='userImage' class='profilepicture' />
+                </figure>
+            </div>
+            <div class='profiletext profiletop'>
+                <h1 class='is-size-4'>{{ nickname }}</h1>
+                <b>Total likes received</b>: {{ received_likes }}
+            </div>
         </div>
-        <h2>{{ fullname }} posts</h2>
-        <div class='feed' v-dragscroll.y>
+        <div class='tabs is-fullwidth' style='margin-bottom: 10px;'>
+            <ul>
+                <li
+                    :class="tab === 'feed' ? 'is-active' : ''"
+                    @click='showFeed'>
+                    <a>
+                        <span class='icon is-small'><i class='fas fa-image' aria-hidden='true'></i></span>
+                        <span>My posts</span>
+                    </a>
+                </li>
+                <li :class="tab === 'settings' ? 'is-active' : ''"
+                    @click='showSettings'>
+                    <a>
+                        <span class='icon is-small'><i class='fas fa-user-cog' aria-hidden='true'></i></span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class='feed' v-show="tab === 'feed'" v-dragscroll.y>
             <onlycheese-post v-for='post in posts'
                 :post='post'
                 :key='posts.indexOf(post)'>
             </onlycheese-post>
         </div>
+        <settings v-show="tab === 'settings'" />
     </div>
 </template>
 
 <script>
 import OnlycheesePost from './OnlycheesePost';
+import Settings from './Settings';
+
 import { DB } from '../firebase/db';
 import { Storage } from '../firebase/storage';
 
@@ -28,16 +53,24 @@ export default {
         return {
             posts: [],
             received_likes: 0,
+            tab: 'feed',
+            nickname: this.$store.getters.nickname,
         };
     },
     computed: {
-        fullname() { return this.$store.getters.fullname; },
-        email() { return this.$store.getters.email; },
+        userImage() { return this.$store.getters.userImage; },
     },
     components: {
         'onlycheese-post': OnlycheesePost,
+        'settings': Settings,
     },
     methods: {
+        showFeed() {
+            this.tab = 'feed';
+        },
+        showSettings() {
+            this.tab = 'settings';
+        },
         listPosts() {
             // reset data first
             this.posts = [];
@@ -47,15 +80,15 @@ export default {
             DB.collection('posts').get().then(snapshot => {
                 snapshot.forEach(doc => {
                     // get user details only for the current logged in user
-                    if (doc.data().userId === this.$store.getters.idToken) {
+                    if (doc.data().userId === this.$store.getters.userId) {
                         // get image link
                         Storage.ref().child('posts').child(doc.id).getDownloadURL().then(url => {
                             DB.collection('users').doc(doc.data().userId).get().then(user => {
                                 // get user profile picture
-                                Storage.ref().child('images').child(user.data().picture).getDownloadURL().then(pp => {
+                                Storage.ref().child('images').child(this.$store.getters.userId).getDownloadURL().then(pp => {
                                     // add post to the top
                                     this.posts.unshift({
-                                        username: `${user.data().firstname} ${user.data().lastname}`,
+                                        username: user.data().nickname,
                                         userImage: pp,
                                         postImage: url,
                                         likes: doc.data().likes,

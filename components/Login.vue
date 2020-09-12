@@ -1,66 +1,70 @@
 <template>
-    <div class='phone-body mt-5 p-5'>
-        <mdb-container fluid grid-list-xl>
-            <mdb-row>
-                <mdb-col col='4' v-if='error !== null'>{{ error }}</mdb-col>
-                <mdb-col col='4'>
-                    <form>
-                        <p class='h4 text-center mb-4'>Log in</p>
-                        <div class='grey-text'>
-                            <mdb-input v-model='email' label='Your email' icon='envelope' type='email' />
-                            <mdb-input v-model='password' label='Your password' icon='lock' type='password' />
-                        </div>
-                        <div class='text-center'>
-                            <mdb-btn @click.native.prevent='login'>Log in</mdb-btn>
-                            <router-link to='/signup'>Sign up</router-link>
-                        </div>
-                    </form>
+    <div class='phone-body'>
+        <div class='width-80-centered'>
+            <div class='container' v-if='error !== null'>
+                <div class='notification is-danger'>
+                    <button class='delete' @click="error = null"></button>
+                    {{ error }}
+                </div>
+                <br>
+            </div>
 
-                </mdb-col>
-                <mdb-col col="4"></mdb-col>
-            </mdb-row>
-        </mdb-container>
+            <div class='field'>
+                <label class='label'>Email</label>
+                <div class='control has-icons-left'>
+                    <input class='input is-rounded' placeholder='john@doe.com' v-model='email' type='email' />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+            <div class='field'>
+                <label class='label'>Password</label>
+                <div class='control has-icons-left'>
+                    <input class='input is-rounded' placeholder='******' v-model='password' type='password' />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+            </div>
+            <div class='field is-grouped'>
+                <div class='control'>
+                    <button class='button is-primary' @click='login'>Log in</button>
+                </div>
+                <div class='control'>
+                    <button class='button is-light' @click='signup'>Sign up</button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import {
-        mdbContainer,
-        mdbRow,
-        mdbCol,
-        mdbInput,
-        mdbBtn
-    } from 'mdbvue';
-
 export default {
     name: 'Login',
     data() {
         return {
             email: '',
             password: '',
-            error: '',
+            error: null,
         };
-    },
-    components: {
-        mdbContainer,
-        mdbRow,
-        mdbCol,
-        mdbBtn,
-        mdbInput,
     },
     methods: {
         login() {
             this.$store.dispatch('login', {
                 email: this.email,
                 password: this.password,
-            }).then(msg => {
-                if (msg !== null)
-                    this.error = msg;
+                on_error: error => {
+                    this.error = error;
+                },
             });
+        },
+        signup() {
+            this.$router.push({ name: 'signup', });
         },
     },
 };
 </script>
 
-<style lang='scss' src='../styles/app.scss'>
+<style lang='scss' src='../styles/phone-body.scss'>
 </style>

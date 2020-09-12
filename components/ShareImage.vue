@@ -4,8 +4,8 @@
             :class='selectedFilter()'
             :style="{ backgroundImage: 'url(' + image + ')' }">
         </div>
-        <div class='caption-container'>
-            <textarea class='caption-input'
+        <div class='caption-container width-90-centered'>
+            <textarea class='caption-input textarea'
                 placeholder='Write a caption...'
                 type='text'
                 :value='value'

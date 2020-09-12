@@ -1,8 +1,16 @@
 <template>
     <div class='phone-footer'>
-        <router-link to='/' class='home-cta' v-if="$route.name !== 'login' && $route.name !== 'signup'">
+        <router-link to='/' class='home-cta' v-if='!isLoginOrSignup'>
             <i class='fas fa-home fa-lg'></i>
         </router-link>
+        <div class='center' v-if='isLoginOrSignup'>
+            <p>
+                <i>Show cuterie</i>
+            </p>
+            <p>
+                ©2020 - <a href='https://twitter.com/lexplt'>Alexandre Plateau</a>
+            </p>
+        </div>
         <div class='upload-cta' v-if="$route.name === 'home'">
             <input type='file'
                 name='file' id='file'
@@ -19,6 +27,9 @@
 <script>
 export default {
     name: 'Footer',
+    computed: {
+        isLoginOrSignup() { return this.$route.name === 'login' || this.$route.name === 'signup'; },
+    },
     methods: {
         uploadImage(evt) {
             const files = evt.target.files;

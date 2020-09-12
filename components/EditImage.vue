@@ -1,5 +1,5 @@
 <template>
-    <div class="phone-body">
+    <div class='phone-body'>
         <div class='selected-image'
             :class='selectedFilter()'
             :style="{ backgroundImage: 'url(' + image() + ')' }">
