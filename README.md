@@ -2,7 +2,7 @@
 
 An Instagram clone using VueJS, with an OnlyFan side: to follow some accounts you will need coins!
 
-https://onlycheese.web.app/
+https://only-cheese.web.app/
 
 ## Installation
 
