@@ -17,7 +17,7 @@
     "@firebase/database": "^0.6.11",
     "@firebase/firestore": "^1.16.6",
     "@firebase/storage": "^0.3.42",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "dotenv": "^8.2.0",
     "firebase": "^7.19.1",
     "localforage": "^1.9.0",
