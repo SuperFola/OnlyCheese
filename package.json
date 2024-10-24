@@ -21,7 +21,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^7.19.1",
     "localforage": "^1.9.0",
-    "vue": "^2.6.12",
+    "vue": "^3.0.0",
     "vue-dragscroll": "^2.1.0",
     "vue-router": "^3.4.3",
     "vuefire": "^2.2.4",
